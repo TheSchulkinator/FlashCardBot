@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBotHook", "ChatBotHook\ChatBotHook.csproj", "{FC3AF08D-E7B5-4BDE-BF88-F9456295E2A1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse", "Parse\Parse.csproj", "{31F3EA97-3075-45C3-B229-250025CDE568}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intent", "Intent\Intent.csproj", "{19632C4D-E2DC-4872-932E-A65EB6D2E720}"
 EndProject
@@ -27,10 +25,6 @@ Global
 		{FC3AF08D-E7B5-4BDE-BF88-F9456295E2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC3AF08D-E7B5-4BDE-BF88-F9456295E2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC3AF08D-E7B5-4BDE-BF88-F9456295E2A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31F3EA97-3075-45C3-B229-250025CDE568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31F3EA97-3075-45C3-B229-250025CDE568}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31F3EA97-3075-45C3-B229-250025CDE568}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31F3EA97-3075-45C3-B229-250025CDE568}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19632C4D-E2DC-4872-932E-A65EB6D2E720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19632C4D-E2DC-4872-932E-A65EB6D2E720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19632C4D-E2DC-4872-932E-A65EB6D2E720}.Release|Any CPU.ActiveCfg = Release|Any CPU
