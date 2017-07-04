@@ -16,7 +16,7 @@ namespace ChatBotHook.Tests
 {
     public class FunctionTest
     {
-        [Fact]
+        //[Fact]
         public void TestToUpperFunction()
         {
 
@@ -41,12 +41,12 @@ namespace ChatBotHook.Tests
                     sw.Flush();
                     var l = ms.Length;
                     ms.Position = 0;
-                    var returnModel = d.Deserialize<InputModel>(ms);
+                    var returnModel = d.Deserialize<InputModel<OrderSlotType>>(ms);
 
                     Assert.NotNull(returnModel);
-                    Assert.IsType(typeof(InputModel), returnModel);
-                    Assert.NotNull(returnModel.currentIntent);
-                    Assert.NotNull(returnModel.currentIntent.slots);
+                    Assert.IsType(typeof(InputModel<OrderSlotType>), returnModel);
+                    Assert.NotNull(returnModel.CurrentIntent);
+                    Assert.NotNull(returnModel.CurrentIntent.Slots);
                 }
             }
         }

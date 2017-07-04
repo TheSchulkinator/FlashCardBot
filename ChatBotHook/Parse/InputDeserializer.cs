@@ -22,7 +22,7 @@ namespace ChatBotHook.Parse
                 {
                     
                     sb.Append(sr.ReadToEnd());
-                    _logger.Info(String.Format("ReadStresm: {0}", sb.ToString()));
+                    //_logger.Info(String.Format("ReadStresm: {0}", sb.ToString()));
                     return JsonConvert.DeserializeObject<T>(sb.ToString());
                 }
             }
