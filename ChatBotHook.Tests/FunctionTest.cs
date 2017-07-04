@@ -21,24 +21,12 @@ namespace ChatBotHook.Tests
         [Fact]
         public void TestDeserialize()
         {
-            InputDeserializer d = new InputDeserializer();
-            using (var ms = new MemoryStream())
-            {
-                using (var sw = new StreamWriter(ms))
-                {
-                    sw.Write(input);
-                    sw.Flush();
-                    var l = ms.Length;
-                    ms.Position = 0;
-                    var returnModel = d.Deserialize<InputModel<OrderSlotType>>(ms);
-
-                    Assert.NotNull(returnModel);
-                    Assert.IsType(typeof(InputModel<OrderSlotType>), returnModel);
-                    Assert.NotNull(returnModel.CurrentIntent);
-                    Assert.NotNull(returnModel.CurrentIntent.Slots);
-                    Assert.NotNull(returnModel.Bot);
-                }
-            }
+            var returnModel = CreateTestModel<OrderSlotType>();
+            Assert.NotNull(returnModel);
+            Assert.IsType(typeof(InputModel<OrderSlotType>), returnModel);
+            Assert.NotNull(returnModel.CurrentIntent);
+            Assert.NotNull(returnModel.CurrentIntent.Slots);
+            Assert.NotNull(returnModel.Bot);
         }
 
         [Fact]
