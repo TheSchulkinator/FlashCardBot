@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook", "ChatBotHook\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook.Tests", "ChatBotHook.Tests\ChatBotHook.Tests.csproj", "{6DAC1058-60DC-4EFB-8CDF-3AA90C7CD55F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{3215B463-7680-4A65-B053-2CD32EBC614B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{3215B463-7680-4A65-B053-2CD32EBC614B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intent", "Intent\Intent.csproj", "{114ACD92-B6B0-4BE6-908D-595DB0EC536F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intent", "Intent\Intent.csproj", "{114ACD92-B6B0-4BE6-908D-595DB0EC536F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
