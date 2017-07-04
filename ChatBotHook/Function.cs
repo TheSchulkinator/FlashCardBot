@@ -19,16 +19,16 @@ namespace ChatBotHook
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();
         /// <summary>
-        /// A simple function that takes a string and does a ToUpper
+        /// 
         /// </summary>
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public string FunctionHandler(InputModel<OrderSlotType> input, ILambdaContext context)
+        public InputModel<OrderSlotType> FunctionHandler(InputModel<OrderSlotType> input, ILambdaContext context)
         {
             _logger.Info("Called Function Handler");
             _logger.Info(input.ToString());
-            return "Done";
+            return input;
         }
     }
 }

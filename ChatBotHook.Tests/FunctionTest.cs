@@ -16,22 +16,11 @@ namespace ChatBotHook.Tests
 {
     public class FunctionTest
     {
-        //[Fact]
-        public void TestToUpperFunction()
-        {
-
-            // Invoke the lambda function and confirm the string was upper cased.
-            var function = new Function();
-            var context = new TestLambdaContext();
-            //var upperCase = function.FunctionHandler("hello world", context);
-
-            //Assert.Equal("HELLO WORLD", upperCase);
-        }
+        string input = "{\"currentIntent\": { \"slots\": { \"PickUpDate\": \"2030-11-08\", \"PickUpCity\": \"Chicago\", \"ReturnDate\": \"2030-11-08\", \"CarType\": \"economy\", \"DriverAge\": 21 },\"name\": \"BookCar\",\"confirmationStatus\": \"None\"},\"bot\": {\"alias\": \"$LATEST\",\"version\": \"$LATEST\",\"name\": \"BookTrip\"},\"userId\": \"John\",\"invocationSource\": \"DialogCodeHook\",\"outputDialogMode\": \"Text\",\"messageVersion\": \"1.0\",\"sessionAttributes\": { }}";
 
         [Fact]
         public void TestDeserialize()
         {
-            string input = "{\"currentIntent\": { \"slots\": { \"PickUpDate\": \"2030-11-08\", \"PickUpCity\": \"Chicago\", \"ReturnDate\": \"2030-11-08\", \"CarType\": \"economy\", \"DriverAge\": 21 },\"name\": \"BookCar\",\"confirmationStatus\": \"None\"},\"bot\": {\"alias\": \"$LATEST\",\"version\": \"$LATEST\",\"name\": \"BookTrip\"},\"userId\": \"John\",\"invocationSource\": \"DialogCodeHook\",\"outputDialogMode\": \"Text\",\"messageVersion\": \"1.0\",\"sessionAttributes\": { }}";
             InputDeserializer d = new InputDeserializer();
             using (var ms = new MemoryStream())
             {
@@ -47,8 +36,45 @@ namespace ChatBotHook.Tests
                     Assert.IsType(typeof(InputModel<OrderSlotType>), returnModel);
                     Assert.NotNull(returnModel.CurrentIntent);
                     Assert.NotNull(returnModel.CurrentIntent.Slots);
+                    Assert.NotNull(returnModel.Bot);
                 }
             }
+        }
+
+        [Fact]
+        public void TestSerialize()
+        {
+            string filePath = @"C:\testFolder\test.txt";
+            InputModel<OrderSlotType> inputModel = CreateTestModel<OrderSlotType>();
+            MemoryStream outputStream = new MemoryStream();
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                new InputDeserializer().Serialize<InputModel<OrderSlotType>>(inputModel, fs);
+            }
+            Assert.True(File.Exists(filePath));
+            DeleteFile(filePath);
+        }
+
+        private InputModel<T> CreateTestModel<T>() where T : BaseSlotType
+        {
+            InputDeserializer d = new InputDeserializer();
+            using (var ms = new MemoryStream())
+            {
+                using (var sw = new StreamWriter(ms))
+                {
+                    sw.Write(input);
+                    sw.Flush();
+                    var l = ms.Length;
+                    ms.Position = 0;
+                    return d.Deserialize<InputModel<T>>(ms);
+                }
+            }
+        }
+
+        private void DeleteFile(string filePath)
+        {
+            if (File.Exists(filePath))
+                File.Delete(filePath);
         }
     }
 }
