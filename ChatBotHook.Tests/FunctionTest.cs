@@ -21,9 +21,9 @@ namespace ChatBotHook.Tests
         [Fact]
         public void TestDeserialize()
         {
-            var returnModel = CreateTestModel<OrderSlotType>();
+            var returnModel = CreateTestModel<OrderIntentSlotType>();
             Assert.NotNull(returnModel);
-            Assert.IsType(typeof(InputModel<OrderSlotType>), returnModel);
+            Assert.IsType(typeof(InputModel<OrderIntentSlotType>), returnModel);
             Assert.NotNull(returnModel.CurrentIntent);
             Assert.NotNull(returnModel.CurrentIntent.Slots);
             Assert.NotNull(returnModel.Bot);
@@ -33,11 +33,11 @@ namespace ChatBotHook.Tests
         public void TestSerialize()
         {
             string filePath = @"C:\testFolder\test.txt";
-            InputModel<OrderSlotType> inputModel = CreateTestModel<OrderSlotType>();
+            InputModel<OrderIntentSlotType> inputModel = CreateTestModel<OrderIntentSlotType>();
             MemoryStream outputStream = new MemoryStream();
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
             {
-                new InputDeserializer().Serialize<InputModel<OrderSlotType>>(inputModel, fs);
+                new InputDeserializer().Serialize<InputModel<OrderIntentSlotType>>(inputModel, fs);
             }
             Assert.True(File.Exists(filePath));
             DeleteFile(filePath);

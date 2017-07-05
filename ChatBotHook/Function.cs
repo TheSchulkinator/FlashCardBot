@@ -24,9 +24,9 @@ namespace ChatBotHook
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public InputModel<OrderSlotType> FunctionHandler(InputModel<OrderSlotType> input, ILambdaContext context)
+        public InputModel<WelcomeIntentSlotType> WelcomeFunctionHandler(InputModel<WelcomeIntentSlotType> input, ILambdaContext context)
         {
-            _logger.Info("Called Function Handler");
+            _logger.Info("Called Welcome Function Handler");
             _logger.Info(input.ToString());
             return input;
         }
