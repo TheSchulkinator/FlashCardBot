@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook.Tests", "ChatBo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{3215B463-7680-4A65-B053-2CD32EBC614B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intent", "Intent\Intent.csproj", "{114ACD92-B6B0-4BE6-908D-595DB0EC536F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBotHook.IntentHandlers", "ChatBotHook.IntentHandlers\ChatBotHook.IntentHandlers.csproj", "{D3BC5B5E-12CC-42F4-AF35-1E888B4C9444}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{3215B463-7680-4A65-B053-2CD32EBC614B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3215B463-7680-4A65-B053-2CD32EBC614B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3215B463-7680-4A65-B053-2CD32EBC614B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{114ACD92-B6B0-4BE6-908D-595DB0EC536F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{114ACD92-B6B0-4BE6-908D-595DB0EC536F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{114ACD92-B6B0-4BE6-908D-595DB0EC536F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{114ACD92-B6B0-4BE6-908D-595DB0EC536F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BC5B5E-12CC-42F4-AF35-1E888B4C9444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BC5B5E-12CC-42F4-AF35-1E888B4C9444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BC5B5E-12CC-42F4-AF35-1E888B4C9444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BC5B5E-12CC-42F4-AF35-1E888B4C9444}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
