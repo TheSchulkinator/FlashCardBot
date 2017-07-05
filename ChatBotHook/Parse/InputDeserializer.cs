@@ -20,13 +20,13 @@ namespace ChatBotHook.Parse
                 StringBuilder sb = new StringBuilder();
                 using (var sr = new StreamReader(requestStream))
                 {
-                    
+
                     sb.Append(sr.ReadToEnd());
-                    //_logger.Info(String.Format("ReadStream: {0}", sb.ToString()));
+                    _logger.Info(String.Format("ReadStream: {0}", sb.ToString()));
                     return JsonConvert.DeserializeObject<T>(sb.ToString());
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.Error(String.Format("Exception : {0}{1}{2}", e.Message, Environment.NewLine, e.StackTrace));
             }

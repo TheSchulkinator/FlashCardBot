@@ -9,8 +9,8 @@ using Amazon.Lambda.TestUtilities;
 
 using ChatBotHook;
 using ChatBotHook.Parse;
-using Core.Model;
 using System.IO;
+using Core.Model;
 
 namespace ChatBotHook.Tests
 {
@@ -63,6 +63,25 @@ namespace ChatBotHook.Tests
         {
             if (File.Exists(filePath))
                 File.Delete(filePath);
+        }
+
+        [Fact]
+        public void Test()
+        {
+            Function f = new Function();
+            InputDeserializer d = new InputDeserializer();
+            using (var ms = new MemoryStream())
+            {
+                using (var sw = new StreamWriter(ms))
+                {
+                    sw.Write(input);
+                    sw.Flush();
+                    var l = ms.Length;
+                    ms.Position = 0;
+                    var inputModel =  d.Deserialize<dynamic>(ms);
+                    f.FunctionHandler(inputModel, null);
+                }
+            }
         }
     }
 }
