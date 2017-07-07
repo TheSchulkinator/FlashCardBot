@@ -10,25 +10,20 @@ namespace ChatBotHook.IntentHandlers
 {
     public class ManageDeckHandler : BaseHandler<ManageDeckSlotType>
     {
-        public override dynamic HandleIntent()
+        public override OutputModel<ManageDeckSlotType> HandleIntent()
         {
             //var errors = InputModel.CurrentIntent.Slots.Validate();
             //if (errors.Any())
             //errors.First();
 
             var outputModel = new OutputModel<ManageDeckSlotType>();
-            
-            outputModel.dialogAction = new DialogAction<ManageDeckSlotType>();
             outputModel.dialogAction.type = "ElicitSlot";
             outputModel.dialogAction.slots = InputModel.CurrentIntent.Slots;
-            outputModel.dialogAction.message = new Message();
             outputModel.dialogAction.message.content = "What are you doing boy?";
             outputModel.dialogAction.message.contentType = Constants.RESPONSE_CONTENT_TYPE;
             outputModel.dialogAction.slotToElicit = "ManageType";//nameof(InputModel.CurrentIntent.Slots.ManageType);
             outputModel.dialogAction.intentName = InputModel.CurrentIntent.Name;
-            outputModel.sessionAttributes = new SessionAttributes();
-            string json = JsonConvert.SerializeObject(outputModel);
-            return JsonConvert.DeserializeObject<dynamic>(json);
+            return outputModel;
         }
     }
 }

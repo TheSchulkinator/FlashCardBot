@@ -59,6 +59,19 @@ namespace ChatBotHook.Tests
             }
         }
 
+        [Fact]
+        public void TestSerialize_String()
+        {
+            string filePath = @"C:\testFolder\test.txt";
+            MemoryStream outputStream = new MemoryStream();
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                new InputDeserializer().Serialize<string>(input, fs);
+            }
+            Assert.True(File.Exists(filePath));
+            DeleteFile(filePath);
+        }
+
         private void DeleteFile(string filePath)
         {
             if (File.Exists(filePath))

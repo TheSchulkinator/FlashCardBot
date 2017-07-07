@@ -10,7 +10,7 @@ namespace ChatBotHook.IntentHandlers
     {
         public InputModel<OrderIntentSlotType> InputModel { get; set; }
         //private IMapperService _mapperService = new MapperService();
-        public dynamic HandleIntent(dynamic inputModel)
+        public string HandleIntent(dynamic inputModel)
         {
             var model = JsonConvert.DeserializeObject<InputModel<OrderIntentSlotType>>(inputModel.ToString());
             return null;

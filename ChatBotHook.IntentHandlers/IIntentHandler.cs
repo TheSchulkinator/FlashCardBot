@@ -12,6 +12,6 @@ namespace ChatBotHook.IntentHandlers
 
     public interface IIntentHandler
     {
-        dynamic HandleIntent(dynamic inputModel);
+        string HandleIntent(dynamic inputModel);
     }
 }

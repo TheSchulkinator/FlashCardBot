@@ -37,7 +37,11 @@ namespace ChatBotHook.Parse
         public void Serialize<T>(T response, Stream responseStream)
         {
             _logger.Info(String.Format("Starting Serialize of Type {0}", typeof(T).FullName));
-            string json = JsonConvert.SerializeObject(response);
+            string json = String.Empty;
+            if (typeof(T) != typeof(string))
+                json = JsonConvert.SerializeObject(response);
+            else
+                json = response as string;
             var sw = new StreamWriter(responseStream);
             sw.Write(json);
             sw.Flush();
