@@ -2,10 +2,10 @@
 {
     public class DialogAction<SlotType>
     {
-        public string Type { get; set; }
-        public string IntentName { get; set; }
-        public string SlotToElict { get; set; }
-        public Message Message { get; set; }
-        public SlotType Slots { get; set; }
+        public string type { get; set; }
+        public string intentName { get; set; }
+        public string slotToElicit { get; set; }
+        public Message message { get; set; }
+        public SlotType slots { get; set; }
     }
 }

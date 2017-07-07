@@ -12,18 +12,21 @@ namespace ChatBotHook.IntentHandlers
     {
         public override dynamic HandleIntent()
         {
-            var errors = InputModel.CurrentIntent.Slots.Validate();
+            //var errors = InputModel.CurrentIntent.Slots.Validate();
             //if (errors.Any())
             //errors.First();
 
             var outputModel = new OutputModel<ManageDeckSlotType>();
-
-            outputModel.DialogAction.Slots = InputModel.CurrentIntent.Slots;
-            outputModel.DialogAction.Message.Content = "What are you doing boy?";
-            outputModel.DialogAction.Message.ContentType = Constants.RESPONSE_CONTENT_TYPE;
-            outputModel.DialogAction.SlotToElict = nameof(InputModel.CurrentIntent.Slots.ManageType);
-            outputModel.DialogAction.IntentName = InputModel.CurrentIntent.Name;
-
+            
+            outputModel.dialogAction = new DialogAction<ManageDeckSlotType>();
+            outputModel.dialogAction.type = "ElicitSlot";
+            outputModel.dialogAction.slots = InputModel.CurrentIntent.Slots;
+            outputModel.dialogAction.message = new Message();
+            outputModel.dialogAction.message.content = "What are you doing boy?";
+            outputModel.dialogAction.message.contentType = Constants.RESPONSE_CONTENT_TYPE;
+            outputModel.dialogAction.slotToElicit = "ManageType";//nameof(InputModel.CurrentIntent.Slots.ManageType);
+            outputModel.dialogAction.intentName = InputModel.CurrentIntent.Name;
+            outputModel.sessionAttributes = new SessionAttributes();
             string json = JsonConvert.SerializeObject(outputModel);
             return JsonConvert.DeserializeObject<dynamic>(json);
         }

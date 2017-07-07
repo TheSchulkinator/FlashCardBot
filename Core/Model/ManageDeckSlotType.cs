@@ -10,7 +10,7 @@ namespace Core.Model
     {
         public string ManageType { get; set; }
         public string DeckName { get; set; }
-        public List<CardModel> Cards { get; set; }
+        public string JSONFile { get; set; }
 
         public IEnumerable<ValidationError> Validate()
         {

@@ -2,7 +2,7 @@
 {
     public class Message
     {
-        public string ContentType { get; set; }
-        public string Content { get; set; }
+        public string contentType { get; set; }
+        public string content { get; set; }
     }
 }
