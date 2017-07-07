@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Model
 {
-    public class InputModel<SlotType> where SlotType : BaseSlotType
+    public class InputModel<SlotType> where SlotType : ISlotType
     {
         public string MessageVersion { get; set; }
         public string InvocationSource { get; set; }

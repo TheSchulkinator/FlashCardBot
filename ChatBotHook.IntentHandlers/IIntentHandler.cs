@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ChatBotHook.IntentHandlers
 {
-    public interface IIntentHandler<SlotType> : IIntentHandler where SlotType : BaseSlotType 
+    public interface IIntentHandler<SlotType> : IIntentHandler where SlotType : ISlotType 
     {
         //InputModel<SlotType> InputModel { get; set; }
     }

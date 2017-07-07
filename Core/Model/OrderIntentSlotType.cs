@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.ComponentModel;
 
 namespace Core.Model
 {
-    public class OrderIntentSlotType : BaseSlotType
+    public class OrderIntentSlotType : ISlotType
     {
         public string PickUpDate { get; set; }
         public string PickUpCity { get; set; }
@@ -21,6 +22,11 @@ namespace Core.Model
             sb.Append(String.Format(Constants.STRING_FORMAT_PROPERTY_VALUE, nameof(CarType), CarType));
             sb.Append(String.Format(Constants.STRING_FORMAT_PROPERTY_VALUE, nameof(DriverAge), DriverAge));
             return sb.ToString();
+        }
+
+        public IEnumerable<ValidationError> Validate()
+        {
+            throw new NotImplementedException();
         }
     }
 }

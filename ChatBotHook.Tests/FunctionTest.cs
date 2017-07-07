@@ -43,7 +43,7 @@ namespace ChatBotHook.Tests
             DeleteFile(filePath);
         }
 
-        private InputModel<T> CreateTestModel<T>() where T : BaseSlotType
+        private InputModel<T> CreateTestModel<T>() where T : ISlotType
         {
             InputDeserializer d = new InputDeserializer();
             using (var ms = new MemoryStream())

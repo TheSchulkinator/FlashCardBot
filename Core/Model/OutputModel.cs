@@ -4,13 +4,10 @@ using System.Text;
 
 namespace Core.Model
 {
-    public class OutputModel<SlotType> where SlotType : BaseSlotType
+    public class OutputModel<SlotType> where SlotType : ISlotType
     {
-        public DialogAction DialogAction { get; set; }
-        public string SlotToElict { get; set; }
-        public string IntentName { get; set; }
-        public SlotType Slots { get; set; }
-        public Message Message { get; set; }
+        public DialogAction<SlotType> DialogAction { get; set; }
+       
         //public string SessionAttributes { get; set; }
     }
 }
