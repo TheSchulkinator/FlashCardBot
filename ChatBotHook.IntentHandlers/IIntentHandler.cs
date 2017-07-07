@@ -7,7 +7,7 @@ namespace ChatBotHook.IntentHandlers
 {
     public interface IIntentHandler<SlotType> : IIntentHandler where SlotType : BaseSlotType 
     {
-        InputModel<SlotType> InputModel { get; set; }
+        //InputModel<SlotType> InputModel { get; set; }
     }
 
     public interface IIntentHandler

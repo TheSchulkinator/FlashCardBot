@@ -14,7 +14,8 @@ namespace ChatBotHook.IntentHandlers
                 intentHandler = new AddOrRecognizeHandler();
             if(intentName == "bookcar")
                 intentHandler = new AddOrRecognizeHandler();
-
+            if (intentName == "managedecks")
+                intentHandler = new ManageDeckHandler();
             return intentHandler;
         }
     }

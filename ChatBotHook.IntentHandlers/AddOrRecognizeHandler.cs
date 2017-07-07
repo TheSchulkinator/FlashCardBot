@@ -9,7 +9,7 @@ namespace ChatBotHook.IntentHandlers
 {
     public class AddOrRecognizeHandler : IIntentHandler<OrderIntentSlotType>
     {
-        public InputModel<OrderIntentSlotType> InputModel { get; set ; }
+        public InputModel<OrderIntentSlotType> InputModel { get; set; }
         //private IMapperService _mapperService = new MapperService();
         public dynamic HandleIntent(dynamic inputModel)
         {
