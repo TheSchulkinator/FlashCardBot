@@ -7,6 +7,6 @@ namespace Core.Model
 {
     public interface ISlotType : IValidation
     {
-
+        string GetSlotToElicit();
     }
 }

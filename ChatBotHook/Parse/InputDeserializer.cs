@@ -38,20 +38,14 @@ namespace ChatBotHook.Parse
         {
             _logger.Info(String.Format("Starting Serialize of Type {0}", typeof(T).FullName));
             string json = String.Empty;
-            if (typeof(T) != typeof(string))
+            //if (typeof(T) != typeof(string))
                 json = JsonConvert.SerializeObject(response);
-            else
-                json = response as string;
+            //else
+            //json = response as string;
+            //_logger.Info(String.Format("Writing {0}", json));
             var sw = new StreamWriter(responseStream);
             sw.Write(json);
             sw.Flush();
-        }
-
-        private const string ResponseFormat = "{ \"dialogAction\": { \"type\": \"Close\", \"fulfillmentState\": \"fulfilled\", \"message\": { \"contentType\": \"PlainText\", \"content\": {0} } } }";
-
-        private string BuildResponse(string message)
-        {
-            return String.Format(ResponseFormat, message);
         }
     }
 }

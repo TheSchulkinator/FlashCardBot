@@ -13,7 +13,7 @@ namespace ChatBotHook.IntentHandlers
         public string HandleIntent(dynamic inputModel)
         {
             InputModel = JsonConvert.DeserializeObject<InputModel<T>>(inputModel.ToString());
-            return SerializeOutput(HandleIntent());
+            return SerializeOutput(ProcessIntent());
         }
 
         private string SerializeOutput(OutputModel<T> outputModel)
@@ -21,6 +21,6 @@ namespace ChatBotHook.IntentHandlers
             return JsonConvert.SerializeObject(outputModel);
         }
 
-        public abstract OutputModel<T> HandleIntent();
+        protected abstract OutputModel<T> ProcessIntent();
     }
 }

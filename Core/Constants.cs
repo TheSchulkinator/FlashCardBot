@@ -16,6 +16,8 @@ namespace Core
         //Response Names
         public const string RESPONSE_CONTENT_TYPE = "PlainText";
 
+        //IntentNames
+        public const string INTENT_NAME_MANAGE_DECKS = "ManageDecks";
 
         //Sommething else
         public enum ManageTypes

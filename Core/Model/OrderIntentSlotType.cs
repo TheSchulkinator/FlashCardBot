@@ -13,6 +13,11 @@ namespace Core.Model
         public string CarType { get; set; }
         public string DriverAge { get; set; }
 
+        public string GetSlotToElicit()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

@@ -16,7 +16,7 @@ namespace ChatBotHook.Tests
 {
     public class FunctionTest
     {
-        string input = "{\"currentIntent\": { \"slots\": { \"PickUpDate\": \"2030-11-08\", \"PickUpCity\": \"Chicago\", \"ReturnDate\": \"2030-11-08\", \"CarType\": \"economy\", \"DriverAge\": 21 },\"name\": \"BookCar\",\"confirmationStatus\": \"None\"},\"bot\": {\"alias\": \"$LATEST\",\"version\": \"$LATEST\",\"name\": \"BookTrip\"},\"userId\": \"John\",\"invocationSource\": \"DialogCodeHook\",\"outputDialogMode\": \"Text\",\"messageVersion\": \"1.0\",\"sessionAttributes\": { }}";
+        string input = "{\"currentIntent\": { \"slots\": { \"PickUpDate\": \"2030-11-08\", \"PickUpCity\": \"Chicago\", \"ReturnDate\": \"2030-11-08\", \"CarType\": \"economy\", \"DriverAge\": 21 },\"name\": \"ManageDecks\",\"confirmationStatus\": \"None\"},\"bot\": {\"alias\": \"$LATEST\",\"version\": \"$LATEST\",\"name\": \"BookTrip\"},\"userId\": \"John\",\"invocationSource\": \"DialogCodeHook\",\"outputDialogMode\": \"Text\",\"messageVersion\": \"1.0\",\"sessionAttributes\": { }}";
 
         [Fact]
         public void TestDeserialize()
@@ -92,7 +92,7 @@ namespace ChatBotHook.Tests
                     var l = ms.Length;
                     ms.Position = 0;
                     var inputModel =  d.Deserialize<dynamic>(ms);
-                    f.FunctionHandler(inputModel, null);
+                    string output = f.FunctionHandler(inputModel, null);
                 }
             }
         }

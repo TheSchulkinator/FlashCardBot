@@ -7,13 +7,9 @@ namespace ChatBotHook.IntentHandlers
 {
     public class FlashCardBotIntentCreator : IntentCreator
     {
-        public override IIntentHandler CreateIntentHandler(string intentName)
+        protected override IIntentHandler CreateIntentHandler(string intentName)
         {
             IIntentHandler intentHandler = null;
-            if (intentName == "addorrecognizeuser")
-                intentHandler = new AddOrRecognizeHandler();
-            if(intentName == "bookcar")
-                intentHandler = new AddOrRecognizeHandler();
             if (intentName == "managedecks")
                 intentHandler = new ManageDeckHandler();
             return intentHandler;

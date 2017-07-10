@@ -9,9 +9,39 @@ namespace Core.Model
         public string MessageVersion { get; set; }
         public string InvocationSource { get; set; }
         public string UserID { get; set; }
-        public Bot Bot { get; set; }
+        private Bot _Bot;
+        public Bot Bot
+        {
+            get
+            {
+                if(_Bot == null)
+                {
+                    _Bot = new Bot();
+                }
+                return _Bot;
+            }
+            set
+            {
+                _Bot = value;
+            }
+        }
         public string OutputDialogMode { get; set; }
-        public CurrentIntent<SlotType> CurrentIntent { get; set; }
+
+        private CurrentIntent<SlotType> _CurrentIntent;
+        public CurrentIntent<SlotType> CurrentIntent {
+            get
+            {
+                if(_CurrentIntent == null)
+                {
+                    _CurrentIntent = new CurrentIntent<SlotType>();
+                }
+                return _CurrentIntent;
+            }
+            set
+            {
+                _CurrentIntent = value;
+            }
+        }
         //public string SessionAttributes { get; set; }
 
         public override string ToString()

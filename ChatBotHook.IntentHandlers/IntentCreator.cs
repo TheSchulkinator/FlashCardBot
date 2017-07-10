@@ -13,6 +13,6 @@ namespace ChatBotHook.IntentHandlers
             return CreateIntentHandler(intentName.ToLower());
         }
 
-        public abstract IIntentHandler CreateIntentHandler(string intentName);
+        protected abstract IIntentHandler CreateIntentHandler(string intentName);
     }
 }
