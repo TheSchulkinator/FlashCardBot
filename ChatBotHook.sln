@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook.IntentHandlers"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook.IntentHandlers.Test", "ChatBotHook.IntentHandlers.Test\ChatBotHook.IntentHandlers.Test.csproj", "{95220747-5980-40BB-AD18-ABE67178CC9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBotHook.DAL", "ChatBotHook.DAL\ChatBotHook.DAL.csproj", "{9B4A7421-3F99-4BBF-B796-E12AC0EDDD90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook.DAL", "ChatBotHook.DAL\ChatBotHook.DAL.csproj", "{9B4A7421-3F99-4BBF-B796-E12AC0EDDD90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBotHook.DAL.Tests", "ChatBotHook.DAL.Tests\ChatBotHook.DAL.Tests.csproj", "{3DC6C315-5E22-440E-9A7D-C19CECCDFB87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBotHook.DAL.Tests", "ChatBotHook.DAL.Tests\ChatBotHook.DAL.Tests.csproj", "{3DC6C315-5E22-440E-9A7D-C19CECCDFB87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Test", "Core.Test\Core.Test.csproj", "{E2F63566-891F-4B5C-B14A-0529ED5BC666}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{3DC6C315-5E22-440E-9A7D-C19CECCDFB87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DC6C315-5E22-440E-9A7D-C19CECCDFB87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DC6C315-5E22-440E-9A7D-C19CECCDFB87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2F63566-891F-4B5C-B14A-0529ED5BC666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2F63566-891F-4B5C-B14A-0529ED5BC666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2F63566-891F-4B5C-B14A-0529ED5BC666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2F63566-891F-4B5C-B14A-0529ED5BC666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

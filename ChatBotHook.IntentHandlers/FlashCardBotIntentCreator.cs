@@ -12,6 +12,8 @@ namespace ChatBotHook.IntentHandlers
             IIntentHandler intentHandler = null;
             if (intentName == "managedecks")
                 intentHandler = new ManageDeckHandler();
+            if (intentName == "quiz")
+                intentHandler = new QuizIntentHandler();
             return intentHandler;
         }
     }

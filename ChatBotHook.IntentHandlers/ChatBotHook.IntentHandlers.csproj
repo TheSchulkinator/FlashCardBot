@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChatBotHook.DAL\ChatBotHook.DAL.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 

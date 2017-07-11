@@ -18,7 +18,6 @@
                 return _message;
             }
         }
-
         public SlotType slots { get; set; }
     }
 }

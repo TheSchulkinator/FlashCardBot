@@ -2,12 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Amazon.Lambda.Core;
-using System.Reflection;
-using AWS.Logger.Core;
 using NLog;
-using Core.Model;
 using ChatBotHook.IntentHandlers;
 using Newtonsoft.Json;
 

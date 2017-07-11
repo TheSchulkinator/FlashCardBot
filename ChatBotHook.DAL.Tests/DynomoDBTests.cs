@@ -6,14 +6,14 @@ namespace ChatBotHook.DAL.Tests
 {
     public class DynomoDBTests
     {
-        [Fact]
+        //[Fact]
         public void Test_Load()
         {
             DynomoDatabaseDAL dataAccess = new DynomoDatabaseDAL();
-            var deck = dataAccess.GetDeck("User1", "D7");
+            var deck = dataAccess.GetDeck("User1", "D1");
         }
 
-        [Fact]
+        //[Fact]
         public void Test_Add()
         {
             DynomoDatabaseDAL dataAccess = new DynomoDatabaseDAL();

@@ -18,6 +18,7 @@ namespace Core
 
         //IntentNames
         public const string INTENT_NAME_MANAGE_DECKS = "ManageDecks";
+        public const string INTENT_NAME_QUIZ = "Quiz";
 
         //Sommething else
         public enum ManageTypes

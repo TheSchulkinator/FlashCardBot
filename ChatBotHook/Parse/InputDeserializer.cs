@@ -42,7 +42,7 @@ namespace ChatBotHook.Parse
                 json = JsonConvert.SerializeObject(response);
             //else
             //json = response as string;
-            //_logger.Info(String.Format("Writing {0}", json));
+            _logger.Info(String.Format("Writing {0}", json));
             var sw = new StreamWriter(responseStream);
             sw.Write(json);
             sw.Flush();

@@ -25,6 +25,7 @@ namespace Core.Model
                 _Bot = value;
             }
         }
+
         public string OutputDialogMode { get; set; }
 
         private CurrentIntent<SlotType> _CurrentIntent;
@@ -42,7 +43,8 @@ namespace Core.Model
                 _CurrentIntent = value;
             }
         }
-        //public string SessionAttributes { get; set; }
+
+        public SessionAttributes SessionAttributes { get; set; }
 
         public override string ToString()
         {
