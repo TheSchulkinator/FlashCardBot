@@ -9,6 +9,10 @@ namespace Core
         //Messages
         public const string STRING_FORMAT_PROPERTY_VALUE = "{0} : {1}, ";
 
+        public const string MESSAGE_RESPONSE_UPDATE_SUCCESS = "Done! Your deck has been {0}";
+        public const string MESSAGE_RESPONSE_UPDATE_FAILURE = "Unsuccessful! {0}";
+
+
         //Error Messages
         public const string ERROR_MESSAGE_INVALID_VALUE = "{0} is invalid.";
         public const string ERROR_MESSAGE_RETRY_RESPONSE = "{0}";

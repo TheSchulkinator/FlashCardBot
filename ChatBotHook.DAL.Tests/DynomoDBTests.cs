@@ -10,7 +10,7 @@ namespace ChatBotHook.DAL.Tests
         public void Test_Load()
         {
             DynomoDatabaseDAL dataAccess = new DynomoDatabaseDAL();
-            var deck = dataAccess.GetDeck("User1", "D1");
+            var deck = dataAccess.GetDeck("User1", "D11");
         }
 
         //[Fact]

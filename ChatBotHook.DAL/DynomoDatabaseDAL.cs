@@ -35,9 +35,23 @@ namespace ChatBotHook.DAL
             }
         }
 
+        public void AddCardToDeck(string userId, string deckName, string front, string back)
+        {
+            AddCardToDeck(userId, deckName, new Card() { Front = front, Back = back });
+        }
+
+        public void AddCardToDeck(string userId, string deckName, Card card)
+        {
+            var deck = GetDeck(userId, deckName);
+            var context = new DynamoDBContext(Client);
+            deck.Cards.Add(card);
+            var task = context.SaveAsync<Deck>(deck);
+            while (!task.IsCompleted)
+                Thread.Sleep(500);
+        }
+
         public void AddNewDeck(string userId, string deckName, Deck deck = null)
         {
-            _logger.Info(String.Format("Adding a new deck: {0}, {1}", userId, deckName));
             var context = new DynamoDBContext(Client);
             if(deck == null)
                 deck = new Deck();
@@ -55,12 +69,16 @@ namespace ChatBotHook.DAL
             {
                 _logger.Info(String.Format("Exception on write: {0}", e.Message));
             }
-            _logger.Info("Done");
+        }
+
+        public bool DeckExits(string userId, string deckName)
+        {
+            return GetDeck(userId, deckName) != null;
         }
 
         public Deck GetDeck(string userId, string deckName)
         {
-            var context = new DynamoDBContext(Client);
+           var context = new DynamoDBContext(Client);
            return context.LoadAsync<Deck>(userId, deckName).Result;
         }
 

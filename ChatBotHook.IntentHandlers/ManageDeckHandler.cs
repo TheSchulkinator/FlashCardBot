@@ -54,31 +54,62 @@ namespace ChatBotHook.IntentHandlers
                 if (InputModel.CurrentIntent.Slots.ManageType.ToLower() == Constants.ManageTypes.Add.ToString().ToLower())
                     responseMessage = String.Format("Are you sure you want to add {0} as a new flash card deck?", InputModel.CurrentIntent.Slots.DeckName);
                 else if (InputModel.CurrentIntent.Slots.ManageType.ToLower() == Constants.ManageTypes.Delete.ToString().ToLower())
-                    responseMessage = String.Format("Are you sure you want to delete the flash car deck named {0}", InputModel.CurrentIntent.Slots.DeckName);
+                    responseMessage = String.Format("Are you sure you want to delete the flash card deck named {0}", InputModel.CurrentIntent.Slots.DeckName);
                 else
+                {
+                    if (Dal.DeckExits(InputModel.UserID, slots.DeckName))
+                    {
+                        Dal.AddCardToDeck(InputModel.UserID, slots.DeckName, slots.Front, slots.Back);
+                    }
                     responseMessage = "Would you like to add another?";
+                }
             }
             else if(slotToElicit == string.Empty)
             {
-                slotToElicit = null;
-                if (!InputModel.CurrentIntent.Slots.Validate().Any())
+                if (InputModel.CurrentIntent.Slots.Confirm.ToLower() == "yes")
                 {
+                    string manageType = InputModel.CurrentIntent.Slots.ManageType.ToLower();
+                    string successType = String.Empty;
+                    if (manageType == Constants.ManageTypes.Modify.ToString().ToLower())
+                    {
+                        slots.Front = null;
+                        slots.Back = null;
+                        slots.Confirm = null;
+                        slotToElicit = slots.GetSlotToElicit();
+                        responseMessage = "Enter the front of the card";
+                    }
+                    else
+                    {
+                        slotToElicit = null;
+                        dialogActionType = Constants.DIALOG_ACTION_TYPE_CLOSE;
+                        fulfillmentState = Constants.FULLFILLMENT_STATE_FULFILLED;
+                        intentName = null;
+                        slots = null;
+                        if (manageType == Constants.ManageTypes.Add.ToString().ToLower())
+                        {
+                            manageType = "added";
+                            if (!Dal.DeckExits(InputModel.UserID, InputModel.CurrentIntent.Name))
+                            {
+                                Dal.AddNewDeck(InputModel.UserID, InputModel.CurrentIntent.Slots.DeckName);
+                                responseMessage = String.Format(Constants.MESSAGE_RESPONSE_UPDATE_SUCCESS, manageType);
+                            }
+                        }
+                        else if (manageType == Constants.ManageTypes.Delete.ToString().ToLower())
+                        {
+                            manageType = "deleted";
+                            responseMessage = String.Format(Constants.MESSAGE_RESPONSE_UPDATE_SUCCESS, manageType);
+                            //Dal.AddNewDeck(InputModel.UserID, InputModel.CurrentIntent.Slots.DeckName);
+                        }
+                    }
+                }
+                else
+                {
+                    responseMessage = "OK";
+                    slotToElicit = null;
                     dialogActionType = Constants.DIALOG_ACTION_TYPE_CLOSE;
                     fulfillmentState = Constants.FULLFILLMENT_STATE_FULFILLED;
                     intentName = null;
                     slots = null;
-                    string manageType = InputModel.CurrentIntent.Slots.ManageType.ToLower();
-                    if (manageType == Constants.ManageTypes.Add.ToString().ToLower())
-                    {
-                        manageType = "added";
-                        Dal.AddNewDeck(InputModel.UserID, InputModel.CurrentIntent.Slots.DeckName);
-                    }
-                    else if (manageType == Constants.ManageTypes.Delete.ToString().ToLower())
-                    {
-                        manageType = "deleted";
-                        Dal.AddNewDeck(InputModel.UserID, InputModel.CurrentIntent.Slots.DeckName);
-                    }
-                    responseMessage = String.Format("OK, your deck has been {0}", manageType);
                 }
             }
 
