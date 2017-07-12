@@ -11,8 +11,10 @@ namespace ChatBotHook.IntentHandlers.Test.Mock
     {
         public bool AddDeckCalled { get; set; }
         public bool GetDeckCalled { get; set; }
+        public bool GetAllDecksCalled { get; set; }
         public bool UpdateDeckCalled { get; set; }
         public bool AddCardToDeckCaleled { get; set; }
+        public bool DeleteDeckCalled { get; set; }
         public Data LastDataPassed { get; set; }
         public bool DeckExists = false;
 
@@ -79,6 +81,16 @@ namespace ChatBotHook.IntentHandlers.Test.Mock
             return new Deck();
         }
 
+        public List<Deck> GetAllDecks(string userId)
+        {
+            GetAllDecksCalled = true;
+            LastDataPassed = new Data()
+            {
+                UserId = userId
+            };
+            return new List<Deck>();
+        }
+
         public void UpdateDeck(Deck deck)
         {
             UpdateDeckCalled = true;
@@ -88,12 +100,24 @@ namespace ChatBotHook.IntentHandlers.Test.Mock
             };
         }
 
+        public void DeleteDeck(string userId, string deckName)
+        {
+            DeleteDeckCalled = true;
+            LastDataPassed = new Data()
+            {
+                UserId = userId,
+                DeckName = deckName
+            };
+        }
+
         public void Reset()
         {
             AddDeckCalled = false;
             GetDeckCalled = false;
             UpdateDeckCalled = false;
             AddCardToDeckCaleled = false;
+            GetAllDecksCalled = false;
+            DeleteDeckCalled = false;
             LastDataPassed = null;
             DeckExists = false;
         }

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.DataModel;
 using Core.Model.Entity;
 using NLog;
@@ -23,7 +22,7 @@ namespace ChatBotHook.DAL
         {
             get
             {
-                if(_client == null)
+                if (_client == null)
                 {
                     Configure();
                 }
@@ -53,7 +52,7 @@ namespace ChatBotHook.DAL
         public void AddNewDeck(string userId, string deckName, Deck deck = null)
         {
             var context = new DynamoDBContext(Client);
-            if(deck == null)
+            if (deck == null)
                 deck = new Deck();
             deck.UserID = userId;
             deck.DeckName = deckName;
@@ -78,14 +77,31 @@ namespace ChatBotHook.DAL
 
         public Deck GetDeck(string userId, string deckName)
         {
-           var context = new DynamoDBContext(Client);
-           return context.LoadAsync<Deck>(userId, deckName).Result;
+            var context = new DynamoDBContext(Client);
+            return context.LoadAsync<Deck>(userId, deckName).Result;
+        }
+
+        public List<Deck> GetAllDecks(string userId)
+        {
+            var context = new DynamoDBContext(Client);
+            return context.QueryAsync<Deck>(userId).GetRemainingAsync().Result;
         }
 
         public void UpdateDeck(Deck deck)
         {
             var context = new DynamoDBContext(Client);
-            context.SaveAsync<Deck>(deck);
+            var task = context.SaveAsync<Deck>(deck);
+            while (!task.IsCompleted)
+                Thread.Sleep(500);
+        }
+
+        public void DeleteDeck(string userId, string deckName)
+        {
+            var deck = GetDeck(userId, deckName);
+            var context = new DynamoDBContext(Client);
+            var task = context.DeleteAsync<Deck>(deck);
+            while (!task.IsCompleted)
+                Thread.Sleep(500);
         }
 
         private void Configure()

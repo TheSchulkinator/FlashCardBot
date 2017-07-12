@@ -19,5 +19,19 @@ namespace ChatBotHook.DAL.Tests
             DynomoDatabaseDAL dataAccess = new DynomoDatabaseDAL();
             dataAccess.AddNewDeck("User1", "D1");
         }
+
+        //[Fact]
+        public void Test_GetDecks()
+        {
+            DynomoDatabaseDAL dataAccess = new DynomoDatabaseDAL();
+            var decks = dataAccess.GetAllDecks("f14ahg07kbm0w78f97pqgxfwwxxval6c");
+        }
+
+        //[Fact]
+        public void Test_DeleteDeck()
+        {
+            DynomoDatabaseDAL dataAccess = new DynomoDatabaseDAL();
+            dataAccess.DeleteDeck("f14ahg07kbm0w78f97pqgxfwwxxval6c", "Deck2");
+        }
     }
 }
