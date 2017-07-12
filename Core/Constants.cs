@@ -20,6 +20,14 @@ namespace Core
         public const string INTENT_NAME_MANAGE_DECKS = "ManageDecks";
         public const string INTENT_NAME_QUIZ = "Quiz";
 
+        //Dialog Action Types
+        public const string DIALOG_ACTION_TYPE_ELICIT = "ElicitSlot";
+        public const string DIALOG_ACTION_TYPE_CLOSE = "Close";
+
+        //Fulfillment States
+        public const string FULLFILLMENT_STATE_FULFILLED = "Fulfilled";
+        public const string FULFILLMENT_STATE_FAILED = "Failed";
+
         //Sommething else
         public enum ManageTypes
         {

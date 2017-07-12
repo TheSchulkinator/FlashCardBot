@@ -25,7 +25,11 @@ namespace ChatBotHook.IntentHandlers
         public string HandleIntent(dynamic inputModel)
         {
             InputModel = JsonConvert.DeserializeObject<InputModel<T>>(inputModel.ToString());
-            return SerializeOutput(ProcessIntent());
+            return SerializeOutput(ProcessIntent())
+                .Replace("\"fulfillmentState\":null,", String.Empty)
+                .Replace("\"intentName\":null,", String.Empty)
+                .Replace("\"slotToElicit\":null,", String.Empty)
+                .Replace("\"slots\":null", String.Empty);
         }
 
         private string SerializeOutput(OutputModel<T> outputModel)

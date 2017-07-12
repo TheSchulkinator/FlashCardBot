@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Model.Entity;
+using System.Threading.Tasks;
 
 namespace ChatBotHook.IntentHandlers.Test.Mock
 {

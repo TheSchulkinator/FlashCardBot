@@ -5,6 +5,7 @@
         public string type { get; set; }
         public string intentName { get; set; }
         public string slotToElicit { get; set; }
+        public string fulfillmentState { get; set; }
 
         private Message _message;
         public Message message

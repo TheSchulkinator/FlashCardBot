@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.DataModel;
 using Core.Model.Entity;
+using NLog;
+using System.Threading;
 
 namespace ChatBotHook.DAL
 {
     public class DynomoDatabaseDAL : IDatabaseDAL
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         private AmazonDynamoDBClient _client;
         private AmazonDynamoDBClient Client
         {
@@ -32,15 +35,27 @@ namespace ChatBotHook.DAL
             }
         }
 
-        public async void AddNewDeck(string userId, string deckName, Deck deck = null)
+        public void AddNewDeck(string userId, string deckName, Deck deck = null)
         {
+            _logger.Info(String.Format("Adding a new deck: {0}, {1}", userId, deckName));
             var context = new DynamoDBContext(Client);
             if(deck == null)
                 deck = new Deck();
             deck.UserID = userId;
             deck.DeckName = deckName;
+            //deck.Cards = new List<Card>();
             //deck.Cards.Add(new Card() { Front = "Front", Back = "Back" });
-            await context.SaveAsync<Deck>(deck);
+            try
+            {
+                var task = context.SaveAsync<Deck>(deck);
+                while (!task.IsCompleted)
+                    Thread.Sleep(500);
+            }
+            catch (Exception e)
+            {
+                _logger.Info(String.Format("Exception on write: {0}", e.Message));
+            }
+            _logger.Info("Done");
         }
 
         public Deck GetDeck(string userId, string deckName)

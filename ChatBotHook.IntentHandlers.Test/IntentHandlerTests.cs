@@ -35,6 +35,15 @@ namespace ChatBotHook.IntentHandlers.Test
             output = manageDeckHandler.HandleIntent(JsonConvert.DeserializeObject<dynamic>(json));
             outputModel = JsonConvert.DeserializeObject<OutputModel<ManageDeckSlotType>>(output);
 
+            Assert.False(mockDal.AddDeckCalled);
+            Assert.False(mockDal.GetDeckCalled);
+            Assert.False(mockDal.UpdateDeckCalled);
+
+            inputModel.CurrentIntent.Slots.Confirm = "yes";
+            json = JsonConvert.SerializeObject(inputModel);
+            output = manageDeckHandler.HandleIntent(JsonConvert.DeserializeObject<dynamic>(json));
+            outputModel = JsonConvert.DeserializeObject<OutputModel<ManageDeckSlotType>>(output);
+
             Assert.True(mockDal.AddDeckCalled);
             Assert.False(mockDal.GetDeckCalled);
             Assert.False(mockDal.UpdateDeckCalled);
