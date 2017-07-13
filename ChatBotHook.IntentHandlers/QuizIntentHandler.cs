@@ -27,7 +27,7 @@ namespace ChatBotHook.IntentHandlers
             }
             else if (slotToElicit == nameof(QuizSlotType.QuizProgression))
             {
-                if
+                //if
             }
 
                 var outputModel = new OutputModel<QuizSlotType>();
