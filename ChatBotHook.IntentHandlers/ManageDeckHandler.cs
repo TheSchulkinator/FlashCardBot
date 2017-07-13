@@ -24,6 +24,7 @@ namespace ChatBotHook.IntentHandlers
             var errors = InputModel.CurrentIntent.Slots.Validate();
             string slotToElicit = InputModel.CurrentIntent.Slots.GetSlotToElicit();
             string responseMessage = String.Empty;
+            string manageType = InputModel.CurrentIntent.Slots.ManageType.ToLower();
 
             if (slotToElicit == nameof(ManageDeckSlotType.ManageType))
             {
@@ -39,7 +40,10 @@ namespace ChatBotHook.IntentHandlers
             }
             else if(slotToElicit == nameof(ManageDeckSlotType.DeckName))
             {
-                responseMessage = String.Format("What is the name of the deck you'd like to {0}", InputModel.CurrentIntent.Slots.ManageType.ToLower());
+                responseMessage = String.Format("What is the name of the deck you'd like to {0}?", manageType);
+                var allDecks = Dal.GetAllDecks(InputModel.UserID);
+                if (allDecks != null && allDecks.Any())
+                    responseMessage = String.Format("{0} You currently have {1} flash card decks. The names of the decks are: {2}", responseMessage, allDecks.Count, DeckUtilitites.CreateDeckNameString(allDecks));
             }
             else if (slotToElicit == nameof(ManageDeckSlotType.Front))
             {
@@ -64,7 +68,7 @@ namespace ChatBotHook.IntentHandlers
             else if (slotToElicit == nameof(ManageDeckSlotType.Confirm))
             {
                 bool fulFill = false;
-                if (slots.ManageType.ToLower() == Constants.ManageTypes.Add.ToString().ToLower())
+                if (manageType == Constants.ManageTypes.Add.ToString().ToLower())
                 {
                     if (!Dal.DeckExits(InputModel.UserID, slots.DeckName))
                         responseMessage = String.Format("Are you sure you want to add {0} as a new flash card deck?", InputModel.CurrentIntent.Slots.DeckName);
@@ -74,7 +78,7 @@ namespace ChatBotHook.IntentHandlers
                         responseMessage = String.Format("You already have a deck named {0}!", slots.DeckName);
                     }
                 }
-                else if (slots.ManageType.ToLower() == Constants.ManageTypes.Delete.ToString().ToLower())
+                else if (manageType == Constants.ManageTypes.Delete.ToString().ToLower())
                 {
                     if (Dal.DeckExits(InputModel.UserID, slots.DeckName))
                         responseMessage = String.Format("Are you sure you want to delete the flash card deck named {0}", InputModel.CurrentIntent.Slots.DeckName);
@@ -84,7 +88,7 @@ namespace ChatBotHook.IntentHandlers
                         responseMessage = String.Format("You don't have a deck named {0}!", slots.DeckName);
                     }
                 }
-                else if(slots.ManageType.ToLower() == Constants.ManageTypes.Modify.ToString().ToLower())
+                else if(manageType == Constants.ManageTypes.Modify.ToString().ToLower())
                 {
                     Dal.AddCardToDeck(InputModel.UserID, slots.DeckName, slots.Front, slots.Back);
                     responseMessage = "Would you like to add another?";
@@ -102,7 +106,6 @@ namespace ChatBotHook.IntentHandlers
             {
                 if (InputModel.CurrentIntent.Slots.Confirm.ToLower() == "yes")
                 {
-                    string manageType = InputModel.CurrentIntent.Slots.ManageType.ToLower();
                     string successType = String.Empty;
                     if (manageType == Constants.ManageTypes.Modify.ToString().ToLower())
                     {

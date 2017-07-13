@@ -1,13 +1,15 @@
 using ChatBotHook.IntentHandlers.Test.Mock;
 using Core;
 using Core.Model;
+using Core.Model.Entity;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace ChatBotHook.IntentHandlers.Test
 {
-    public class IntentHandlerTests
+    public class ManageDeckHandlerTests
     {
         [Fact]
         public void Test_ManageDeckHandler()
@@ -151,6 +153,29 @@ namespace ChatBotHook.IntentHandlers.Test
 
             Assert.True(mockDal.DeleteDeckCalled);
             Assert.Equal(Constants.FULLFILLMENT_STATE_FULFILLED, outputModel.dialogAction.fulfillmentState);
+
+            mockDal.Reset();
+            mockDal.DecksToReturn = new List<Deck>()
+            {
+                new Deck()
+                { DeckName = "Deck1" },
+                new Deck()
+                { DeckName = "Deck2"}
+            };
+            inputModel.CurrentIntent.Slots.Confirm = null;
+            inputModel.CurrentIntent.Slots.DeckName = null;
+            json = JsonConvert.SerializeObject(inputModel);
+            output = manageDeckHandler.HandleIntent(JsonConvert.DeserializeObject<dynamic>(json));
+            outputModel = JsonConvert.DeserializeObject<OutputModel<ManageDeckSlotType>>(output);
+
+            Assert.True(outputModel.dialogAction.message.content.Contains("2"));
+
+            mockDal.DecksToReturn = null;
+            json = JsonConvert.SerializeObject(inputModel);
+            output = manageDeckHandler.HandleIntent(JsonConvert.DeserializeObject<dynamic>(json));
+            outputModel = JsonConvert.DeserializeObject<OutputModel<ManageDeckSlotType>>(output);
+
+            Assert.False(outputModel.dialogAction.message.content.Contains("You currently have"));
         }
     }
 }
