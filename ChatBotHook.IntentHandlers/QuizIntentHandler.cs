@@ -23,11 +23,11 @@ namespace ChatBotHook.IntentHandlers
             }
             else if (slotToElicit == nameof(QuizSlotType.QuizOrder))
             {
-                responseMessage = "Would you liked to be quizzed in a sequential or random fashion?";
+                responseMessage = "Would you liked to be quizzed in a sequential or a random fashion?";
             }
             else if (slotToElicit == nameof(QuizSlotType.QuizProgression))
             {
-                
+                if
             }
 
                 var outputModel = new OutputModel<QuizSlotType>();
