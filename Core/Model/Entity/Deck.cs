@@ -8,6 +8,7 @@ namespace Core.Model.Entity
     {
         public string UserID { get; set; }
         public string DeckName { get; set; }
+        public int QuizCardStatus;
         private List<Card> _Cards;
         public List<Card> Cards
         {

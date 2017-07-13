@@ -39,5 +39,12 @@ namespace Core
             Modify,
             Delete
         }
+        public enum QuizProgression
+        {
+            Skip,
+            Previous,
+            Stop,
+            Next
+        }
     }
 }

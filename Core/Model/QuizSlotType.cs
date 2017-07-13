@@ -7,11 +7,19 @@ namespace Core.Model
 {
     public class QuizSlotType : ISlotType
     {
-        public string Date { get; set; }
+        public string DeckName { get; set; }
+        public string QuizOrder { get; set; }
+        public string QuizProgression { get; set; }
 
         public string GetSlotToElicit()
         {
-            return nameof(Date);
+            if (String.IsNullOrEmpty(DeckName) || String.IsNullOrWhiteSpace(DeckName))
+                return nameof(DeckName);
+            if (String.IsNullOrEmpty(QuizOrder) || String.IsNullOrWhiteSpace(QuizOrder))
+                return nameof(QuizOrder);
+            if (String.IsNullOrEmpty(QuizProgression) || String.IsNullOrWhiteSpace(QuizProgression))
+                return nameof(QuizProgression);
+            return String.Empty;
         }
 
         public IEnumerable<ValidationError> Validate()
