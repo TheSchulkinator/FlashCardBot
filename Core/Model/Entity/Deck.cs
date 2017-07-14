@@ -177,5 +177,14 @@ namespace Core.Model.Entity
                 _IsDeleted = value;
             }
         }
+
+        public string GetCardDataBasedOnStatus()
+        {
+            if (QuizCardStatusNumber == 1)
+                return Front;
+            if (QuizCardStatusNumber == 2)
+                return Back;
+            return String.Empty;
+        }
     }
 }
