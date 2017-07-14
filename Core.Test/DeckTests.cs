@@ -136,5 +136,105 @@ namespace Core.Test
             currentCard = currentDeck.GetCurrentCard();
             Assert.Null(currentCard);
         }
+
+        [Fact]
+        public void GetNext()
+        {
+            CreateDeck(3);
+            currentDeck.IsQuizRandom = false;
+            for (int i = 0; i < 2; i++)
+            {
+                if (i == 1)
+                {
+                    currentDeck.IsQuizRandom = true;
+                    CreateDeck(3);
+                }
+
+                var currentCard = currentDeck.GetNextCard();
+                Assert.NotNull(currentCard);
+                Assert.Equal(1, currentCard.QuizCardNumber);
+
+                currentCard = currentDeck.GetNextCard();
+                Assert.NotNull(currentCard);
+                Assert.Equal(1, currentCard.QuizCardNumber);
+
+                currentCard = currentDeck.GetNextCard();
+                Assert.NotNull(currentCard);
+                Assert.Equal(2, currentCard.QuizCardNumber);
+
+                currentCard = currentDeck.GetNextCard();
+                Assert.NotNull(currentCard);
+                Assert.Equal(2, currentCard.QuizCardNumber);
+
+                currentCard = currentDeck.GetNextCard();
+                Assert.NotNull(currentCard);
+                Assert.Equal(3, currentCard.QuizCardNumber);
+
+                currentCard = currentDeck.GetNextCard();
+                Assert.NotNull(currentCard);
+                Assert.Equal(3, currentCard.QuizCardNumber);
+
+                currentCard = currentDeck.GetNextCard();
+                Assert.Null(currentCard);
+            }
+        }
+
+        [Fact]
+        public void GetPrevious()
+        {
+            CreateDeck(3);
+            var currentCard = currentDeck.GetCurrentCard();
+            currentDeck.Cards[0].QuizCardStatusNumber = 2;
+            currentDeck.Cards[1].QuizCardStatusNumber = 1;
+
+            currentCard = currentDeck.GetPreviousCard();
+            Assert.NotNull(currentCard);
+            Assert.Equal(1, currentCard.QuizCardNumber);
+            Assert.Equal(1, currentCard.QuizCardStatusNumber);
+            Assert.Equal(0, currentDeck.Cards[1].QuizCardStatusNumber);
+
+            CreateDeck(3);
+            currentCard = currentDeck.GetCurrentCard();
+            currentDeck.Cards[0].IsDeleted = true;
+            currentDeck.Cards[0].IsDeleted= true;
+            currentCard = currentDeck.GetPreviousCard();
+
+            Assert.Null(currentCard);
+
+            CreateDeck(3);
+            currentCard = currentDeck.GetCurrentCard();
+            currentDeck.Cards[0].QuizCardStatusNumber = 2;
+            currentDeck.Cards[1].QuizCardStatusNumber = 2;
+            currentDeck.Cards[2].QuizCardStatusNumber = 2;
+
+            currentCard = currentDeck.GetPreviousCard();
+            Assert.NotNull(currentCard);
+            Assert.Equal(2, currentCard.QuizCardNumber);
+            Assert.Equal(1, currentCard.QuizCardStatusNumber);
+        }
+
+        [Fact]
+        public void SkipCurrentCard()
+        {
+            CreateDeck(3);
+            var currentCard = currentDeck.GetCurrentCard();
+            currentDeck.Cards[0].QuizCardStatusNumber = 2;
+
+            currentCard = currentDeck.SkipCurrentCardAndGetNext();
+            Assert.NotNull(currentCard);
+            Assert.Equal(1, currentCard.QuizCardStatusNumber);
+            Assert.Equal(3, currentCard.QuizCardNumber);
+            Assert.Equal(2, currentDeck.Cards[1].QuizCardStatusNumber = 2);
+
+            currentCard = currentDeck.SkipCurrentCardAndGetNext();
+            Assert.Null(currentCard);
+
+            CreateDeck(3);
+            currentCard = currentDeck.GetCurrentCard();
+            currentCard = currentDeck.SkipCurrentCardAndGetNext();
+            Assert.NotNull(currentCard);
+            Assert.Equal(1, currentCard.QuizCardStatusNumber);
+            Assert.Equal(2, currentCard.QuizCardNumber);
+        }
     }
 }

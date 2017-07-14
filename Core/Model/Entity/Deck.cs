@@ -70,32 +70,61 @@ namespace Core.Model.Entity
         /// <param name="currentCard">The card to update</param>
         public void UpdateCurrentCardStatus(Card currentCard)
         {
-            if (currentCard.QuizCardStatusNumber < 2)
-                currentCard.QuizCardStatusNumber += 1;
+            if (currentCard != null)
+                if (currentCard.QuizCardStatusNumber < 2)
+                    currentCard.QuizCardStatusNumber += 1;
         }
 
+        /// <summary>
+        /// Updates the CurrentCardStatus of the CurrentCard and retrieves the next card
+        /// </summary>
+        /// <returns></returns>
         public Card GetNextCard()
         {
-            throw new NotImplementedException();
-            if (IsQuizRandom)
-            {
-            }
-            else
-            {
-            }
+            var currentCard = GetCurrentCard();
+            UpdateCurrentCardStatus(currentCard);
+            if (currentCard != null && currentCard.QuizCardStatusNumber == 2)
+                return currentCard;
+            return GetCurrentCard();
         }
 
         public Card GetPreviousCard()
         {
-            throw new NotImplementedException();
-            if (IsQuizRandom)
+            var currentCard = GetCurrentCard();
+            if (currentCard != null)
             {
-
+                currentCard.QuizCardStatusNumber = 0;
             }
-            else
+            else if(Cards.Any())
             {
-
+                var avail = GetNonDeletedCards().OrderByDescending(cardNumber => cardNumber.QuizCardNumber);
+                if(avail.Any())
+                {
+                    var last = avail.First();
+                    last.QuizCardStatusNumber = 0;
+                }
             }
+            var available = GetNonDeletedCards().Where(card => card.QuizCardStatusNumber == 2).OrderByDescending(cardNumber => cardNumber.QuizCardNumber);
+            if (available.Any())
+            {
+                var previousCard = available.First();
+                previousCard.QuizCardStatusNumber = 1;
+                return previousCard;
+            }
+            return null;
+        }
+
+        public Card SkipCurrentCardAndGetNext()
+        {
+            var currentCard = GetCurrentCard();
+            if (currentCard != null)
+            {
+                currentCard.QuizCardStatusNumber = 2;
+            }
+            var nextCard = GetCurrentCard();
+            if (nextCard != null)
+                nextCard.QuizCardStatusNumber = 1;
+            return nextCard;
         }
 
         /// <summary>
