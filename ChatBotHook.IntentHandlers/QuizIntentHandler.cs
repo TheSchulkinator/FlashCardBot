@@ -52,18 +52,24 @@ namespace ChatBotHook.IntentHandlers
                 if (quizOrder.Equals(Constants.QuizOrder.Random.ToString().ToLower()))
                 {
                     var deck = Dal.GetDeck(InputModel.UserID, slots.DeckName.ToString().ToLower());
-
                     deck.IsQuizRandom = true;
                     Dal.UpdateDeck(deck);
                 }
             }
             else if (slotToElicit == nameof(QuizSlotType.QuizProgression))
             {
-              
+
+                responseMessage = "State next for next card, previous for previous card, delete to delete the current card or stop to end the quiz!";
 
                 if (quizProgression == Constants.QuizProgression.Next.ToString().ToLower())
                 {
-                    //process next request
+                    var deck = Dal.GetDeck(InputModel.UserID, slots.DeckName.ToString().ToLower());
+                    var currentCard = deck.GetCurrentCard();
+                    responseMessage = currentCard.GetCardDataBasedOnStatus();
+                    deck.GetNextCard();
+
+                    Dal.UpdateDeck(deck);
+                    slots.QuizProgression = null;
                 }
                 else if (quizProgression == Constants.QuizProgression.Previous.ToString().ToLower())
                 {
