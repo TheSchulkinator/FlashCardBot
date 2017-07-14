@@ -46,5 +46,10 @@ namespace Core
             Stop,
             Next
         }
+        public enum QuizOrder
+        {
+            Random,
+            Sequential
+        }
     }
 }
