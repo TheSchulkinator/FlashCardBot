@@ -95,6 +95,15 @@ namespace Core.Model.Entity
             {
                 currentCard.QuizCardStatusNumber = 0;
             }
+            else if(Cards.Any())
+            {
+                var avail = GetNonDeletedCards().OrderByDescending(cardNumber => cardNumber.QuizCardNumber);
+                if(avail.Any())
+                {
+                    var last = avail.First();
+                    last.QuizCardStatusNumber = 0;
+                }
+            }
             var available = GetNonDeletedCards().Where(card => card.QuizCardStatusNumber == 2).OrderByDescending(cardNumber => cardNumber.QuizCardNumber);
             if (available.Any())
             {

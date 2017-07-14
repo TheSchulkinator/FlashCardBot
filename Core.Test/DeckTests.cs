@@ -200,6 +200,17 @@ namespace Core.Test
             currentCard = currentDeck.GetPreviousCard();
 
             Assert.Null(currentCard);
+
+            CreateDeck(3);
+            currentCard = currentDeck.GetCurrentCard();
+            currentDeck.Cards[0].QuizCardStatusNumber = 2;
+            currentDeck.Cards[1].QuizCardStatusNumber = 2;
+            currentDeck.Cards[2].QuizCardStatusNumber = 2;
+
+            currentCard = currentDeck.GetPreviousCard();
+            Assert.NotNull(currentCard);
+            Assert.Equal(2, currentCard.QuizCardNumber);
+            Assert.Equal(1, currentCard.QuizCardStatusNumber);
         }
 
         [Fact]
