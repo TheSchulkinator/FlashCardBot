@@ -18,6 +18,7 @@ namespace ChatBotHook.IntentHandlers
         protected override OutputModel<QuizSlotType> ProcessIntent()
         {
             string fulfillmentState = null;
+            string dialogActionType = Constants.DIALOG_ACTION_TYPE_ELICIT;
             string intentName = InputModel.CurrentIntent.Name;
             var slots = InputModel.CurrentIntent.Slots;
             var errors = InputModel.CurrentIntent.Slots.Validate();
@@ -73,15 +74,35 @@ namespace ChatBotHook.IntentHandlers
                 }
                 else if (quizProgression == Constants.QuizProgression.Previous.ToString().ToLower())
                 {
-                    //process previous
+                    var deck = Dal.GetDeck(InputModel.UserID, slots.DeckName.ToString().ToLower());
+                    var currentCard = deck.GetCurrentCard();
+                    responseMessage = currentCard.GetCardDataBasedOnStatus();
+                    deck.GetPreviousCard();
+
+                    Dal.UpdateDeck(deck);
+                    slots.QuizProgression = null;
                 }
                 else if(quizProgression== Constants.QuizProgression.Skip.ToString().ToLower())
                 {
-                    //process skip
+                    var deck = Dal.GetDeck(InputModel.UserID, slots.DeckName.ToString().ToLower());
+                    var currentCard = deck.GetCurrentCard();
+                    responseMessage = currentCard.GetCardDataBasedOnStatus();
+                    deck.SkipCurrentCardAndGetNext();
+
+                    Dal.UpdateDeck(deck);
+                    slots.QuizProgression = null;
                 }
                 else if(quizProgression == Constants.QuizProgression.Stop.ToString().ToLower())
                 {
-                    //process stop
+                    var deck = Dal.GetDeck(InputModel.UserID, slots.DeckName.ToString().ToLower());
+                    var currentCard = deck.GetCurrentCard();
+                    responseMessage = "Hope this session helped you!";
+
+                    slotToElicit = null;
+                    dialogActionType = Constants.DIALOG_ACTION_TYPE_CLOSE;
+                    fulfillmentState = Constants.FULLFILLMENT_STATE_FULFILLED;
+                    intentName = null;
+                    slots = null;
                 }
 
                 
@@ -89,6 +110,7 @@ namespace ChatBotHook.IntentHandlers
 
             var outputModel = new OutputModel<QuizSlotType>();
             outputModel.dialogAction.fulfillmentState = fulfillmentState;
+            outputModel.dialogAction.type = dialogActionType;
             outputModel.dialogAction.slots = slots;
             outputModel.dialogAction.message.content = responseMessage;
             outputModel.dialogAction.message.contentType = Constants.RESPONSE_CONTENT_TYPE;
